@@ -1,6 +1,7 @@
 theme: jekyll-theme-primer
 title: Introduction
-description: Analyzing popularity of Spotify playlist
+description: Analyzing popularity of Spotify playlists
+favicon: molecule-48-192917.png
 baseurl:
 markdown: kramdown
 kramdown:
