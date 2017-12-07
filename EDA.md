@@ -10,8 +10,6 @@ nav_include: 1
 {: toc}
 
 
-
-
 ```python
 import numpy as np
 import pandas as pd
@@ -23,18 +21,32 @@ import statsmodels.api as sm
 ```
 
 
-
-
-```python
-data = pd.read_csv('data.csv', index_col= 0)
-```
+    /home/pui-user/.local/lib/python2.7/site-packages/statsmodels/compat/pandas.py:56: FutureWarning: The pandas.core.datetools module is deprecated and will be removed in a future version. Please use the pandas.tseries module instead.
+      from pandas.core import datetools
 
 
 
 
 ```python
-data.head()
+data = pd.read_csv('data_spotify_v2.csv', index_col= 0)
+print(data.shape)
+print(data.columns.values)
+data.head(5)
 ```
+
+
+    (1669, 42)
+    ['acousticness_avg' 'acousticness_std' 'artist_genres'
+     'artist_popularity_avg' 'artist_popularity_std' 'danceability_avg'
+     'danceability_std' 'duration_ms_avg' 'duration_ms_std' 'energy_avg'
+     'energy_std' 'first_update' 'followers' 'instrumentalness_avg'
+     'instrumentalness_std' 'is_collaborative' 'is_public' 'key_avg' 'key_std'
+     'last_update' 'liveness_avg' 'liveness_std' 'loudness_avg' 'loudness_std'
+     'mode_avg' 'mode_std' 'num_of_artists' 'num_of_markets_avg' 'num_of_songs'
+     'playlist_name_length' 'song_duration_avg' 'song_duration_std'
+     'song_popularity_avg' 'song_popularity_std' 'speechiness_avg'
+     'speechiness_std' 'tempo_avg' 'tempo_std' 'time_signature_avg'
+     'time_signature_std' 'valence_avg' 'valence_std']
 
 
 
@@ -60,14 +72,14 @@ data.head()
       <th></th>
       <th>acousticness_avg</th>
       <th>acousticness_std</th>
+      <th>artist_genres</th>
+      <th>artist_popularity_avg</th>
+      <th>artist_popularity_std</th>
       <th>danceability_avg</th>
       <th>danceability_std</th>
       <th>duration_ms_avg</th>
       <th>duration_ms_std</th>
       <th>energy_avg</th>
-      <th>energy_std</th>
-      <th>followers</th>
-      <th>instrumentalness_avg</th>
       <th>...</th>
       <th>song_popularity_avg</th>
       <th>song_popularity_std</th>
@@ -84,152 +96,128 @@ data.head()
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.194584</td>
-      <td>0.171983</td>
-      <td>0.655940</td>
-      <td>0.113601</td>
-      <td>203916.7400</td>
-      <td>20848.451678</td>
-      <td>0.655220</td>
-      <td>0.140195</td>
-      <td>1403307</td>
-      <td>0.000076</td>
+      <td>0.201550</td>
+      <td>0.210138</td>
+      <td>35</td>
+      <td>89.831579</td>
+      <td>5.489996</td>
+      <td>0.672320</td>
+      <td>0.131615</td>
+      <td>207939.980000</td>
+      <td>31152.236684</td>
+      <td>0.657740</td>
       <td>...</td>
-      <td>80.5000</td>
-      <td>12.147839</td>
-      <td>0.081500</td>
-      <td>0.067375</td>
-      <td>111.175180</td>
-      <td>25.315509</td>
-      <td>4.0000</td>
+      <td>80.220000</td>
+      <td>16.306183</td>
+      <td>0.080678</td>
+      <td>0.050808</td>
+      <td>120.039820</td>
+      <td>27.196016</td>
+      <td>4.000000</td>
       <td>0.200000</td>
-      <td>0.422914</td>
-      <td>0.165588</td>
+      <td>0.419074</td>
+      <td>0.182246</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.236093</td>
-      <td>0.212474</td>
-      <td>0.641660</td>
-      <td>0.114543</td>
-      <td>217370.1500</td>
-      <td>50370.220381</td>
-      <td>0.705670</td>
-      <td>0.175782</td>
-      <td>2406903</td>
-      <td>0.010640</td>
+      <td>0.166715</td>
+      <td>0.199305</td>
+      <td>26</td>
+      <td>86.978261</td>
+      <td>9.056559</td>
+      <td>0.748429</td>
+      <td>0.133955</td>
+      <td>213376.040816</td>
+      <td>40248.254855</td>
+      <td>0.627816</td>
       <td>...</td>
-      <td>61.8900</td>
-      <td>15.681770</td>
-      <td>0.054565</td>
-      <td>0.039034</td>
-      <td>117.533380</td>
-      <td>21.954430</td>
-      <td>4.0000</td>
-      <td>0.000000</td>
-      <td>0.751000</td>
-      <td>0.199712</td>
+      <td>71.960000</td>
+      <td>20.083785</td>
+      <td>0.225245</td>
+      <td>0.134817</td>
+      <td>128.362633</td>
+      <td>29.037111</td>
+      <td>4.020408</td>
+      <td>0.246593</td>
+      <td>0.450592</td>
+      <td>0.208395</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>0.185966</td>
-      <td>0.173107</td>
-      <td>0.656162</td>
-      <td>0.114090</td>
-      <td>214918.4375</td>
-      <td>34896.851495</td>
-      <td>0.664425</td>
-      <td>0.148360</td>
-      <td>218518</td>
-      <td>0.004704</td>
+      <td>0.115828</td>
+      <td>0.128663</td>
+      <td>60</td>
+      <td>68.231481</td>
+      <td>16.317797</td>
+      <td>0.608870</td>
+      <td>0.146127</td>
+      <td>200221.962963</td>
+      <td>45993.631187</td>
+      <td>0.767889</td>
       <td>...</td>
-      <td>64.3750</td>
-      <td>13.414894</td>
-      <td>0.046010</td>
-      <td>0.022244</td>
-      <td>114.561925</td>
-      <td>21.994968</td>
-      <td>3.9875</td>
-      <td>0.193245</td>
-      <td>0.617387</td>
-      <td>0.211768</td>
+      <td>56.714286</td>
+      <td>22.988906</td>
+      <td>0.061541</td>
+      <td>0.041325</td>
+      <td>125.398907</td>
+      <td>25.782681</td>
+      <td>3.888889</td>
+      <td>0.566558</td>
+      <td>0.368354</td>
+      <td>0.202621</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>0.132846</td>
-      <td>0.117976</td>
-      <td>0.730612</td>
-      <td>0.081441</td>
-      <td>209974.0000</td>
-      <td>28768.262698</td>
-      <td>0.758163</td>
-      <td>0.113106</td>
-      <td>169453</td>
-      <td>0.003579</td>
+      <td>0.237346</td>
+      <td>0.209753</td>
+      <td>25</td>
+      <td>79.058824</td>
+      <td>12.442671</td>
+      <td>0.630980</td>
+      <td>0.127485</td>
+      <td>227396.918367</td>
+      <td>43566.385885</td>
+      <td>0.543082</td>
       <td>...</td>
-      <td>78.2875</td>
-      <td>11.201779</td>
-      <td>0.085573</td>
-      <td>0.053110</td>
-      <td>118.060038</td>
-      <td>29.990054</td>
-      <td>4.0000</td>
-      <td>0.000000</td>
-      <td>0.606237</td>
-      <td>0.201211</td>
+      <td>62.367347</td>
+      <td>15.297984</td>
+      <td>0.127398</td>
+      <td>0.102994</td>
+      <td>115.759082</td>
+      <td>29.865996</td>
+      <td>3.918367</td>
+      <td>0.528252</td>
+      <td>0.434865</td>
+      <td>0.191858</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0.032074</td>
-      <td>0.083080</td>
-      <td>0.487220</td>
-      <td>0.126472</td>
-      <td>206852.6000</td>
-      <td>31874.021837</td>
-      <td>0.803940</td>
-      <td>0.123784</td>
-      <td>473852</td>
-      <td>0.030798</td>
+      <td>0.049196</td>
+      <td>0.124658</td>
+      <td>70</td>
+      <td>72.625000</td>
+      <td>9.734993</td>
+      <td>0.530340</td>
+      <td>0.120331</td>
+      <td>221541.943396</td>
+      <td>28843.710922</td>
+      <td>0.787226</td>
       <td>...</td>
-      <td>55.6000</td>
-      <td>15.390906</td>
-      <td>0.071556</td>
-      <td>0.047209</td>
-      <td>127.606140</td>
-      <td>29.084261</td>
-      <td>3.9200</td>
-      <td>0.440000</td>
-      <td>0.557880</td>
-      <td>0.193230</td>
+      <td>59.415094</td>
+      <td>10.342136</td>
+      <td>0.063791</td>
+      <td>0.049612</td>
+      <td>126.416849</td>
+      <td>25.883036</td>
+      <td>3.905660</td>
+      <td>0.445699</td>
+      <td>0.508849</td>
+      <td>0.204985</td>
     </tr>
   </tbody>
 </table>
-<p>5 rows × 35 columns</p>
+<p>5 rows × 42 columns</p>
 </div>
-
-
-
-
-
-```python
-data.columns
-```
-
-
-
-
-
-    Index(['acousticness_avg', 'acousticness_std', 'danceability_avg',
-           'danceability_std', 'duration_ms_avg', 'duration_ms_std', 'energy_avg',
-           'energy_std', 'followers', 'instrumentalness_avg',
-           'instrumentalness_std', 'is_public', 'key_avg', 'key_std',
-           'liveness_avg', 'liveness_std', 'loudness_avg', 'loudness_std',
-           'mode_avg', 'mode_std', 'no_of_songs', 'num_of_artists',
-           'num_of_markets_avg', 'song_duration_avg', 'song_duration_std',
-           'song_popularity_avg', 'song_popularity_std', 'speechiness_avg',
-           'speechiness_std', 'tempo_avg', 'tempo_std', 'time_signature_avg',
-           'time_signature_std', 'valence_avg', 'valence_std'],
-          dtype='object')
 
 
 
@@ -243,7 +231,7 @@ data.shape
 
 
 
-    (2044, 35)
+    (1669, 42)
 
 
 
@@ -262,45 +250,60 @@ data.info()
 
 
     <class 'pandas.core.frame.DataFrame'>
-    Int64Index: 2043 entries, 0 to 2043
-    Data columns (total 35 columns):
-    acousticness_avg        2043 non-null float64
-    acousticness_std        2043 non-null float64
-    danceability_avg        2043 non-null float64
-    danceability_std        2043 non-null float64
-    duration_ms_avg         2043 non-null float64
-    duration_ms_std         2043 non-null float64
-    energy_avg              2043 non-null float64
-    energy_std              2043 non-null float64
-    followers               2043 non-null int64
-    instrumentalness_avg    2043 non-null float64
-    instrumentalness_std    2043 non-null float64
-    is_public               2043 non-null int64
-    key_avg                 2043 non-null float64
-    key_std                 2043 non-null float64
-    liveness_avg            2043 non-null float64
-    liveness_std            2043 non-null float64
-    loudness_avg            2043 non-null float64
-    loudness_std            2043 non-null float64
-    mode_avg                2043 non-null float64
-    mode_std                2043 non-null float64
-    no_of_songs             2043 non-null int64
-    num_of_artists          2043 non-null int64
-    num_of_markets_avg      2043 non-null float64
-    song_duration_avg       2043 non-null float64
-    song_duration_std       2043 non-null float64
-    song_popularity_avg     2043 non-null float64
-    song_popularity_std     2043 non-null float64
-    speechiness_avg         2043 non-null float64
-    speechiness_std         2043 non-null float64
-    tempo_avg               2043 non-null float64
-    tempo_std               2043 non-null float64
-    time_signature_avg      2043 non-null float64
-    time_signature_std      2043 non-null float64
-    valence_avg             2043 non-null float64
-    valence_std             2043 non-null float64
-    dtypes: float64(31), int64(4)
-    memory usage: 574.6 KB
+    Int64Index: 1669 entries, 0 to 1668
+    Data columns (total 42 columns):
+    acousticness_avg         1669 non-null float64
+    acousticness_std         1669 non-null float64
+    artist_genres            1669 non-null int64
+    artist_popularity_avg    1669 non-null float64
+    artist_popularity_std    1669 non-null float64
+    danceability_avg         1669 non-null float64
+    danceability_std         1669 non-null float64
+    duration_ms_avg          1669 non-null float64
+    duration_ms_std          1669 non-null float64
+    energy_avg               1669 non-null float64
+    energy_std               1669 non-null float64
+    first_update             1669 non-null float64
+    followers                1669 non-null int64
+    instrumentalness_avg     1669 non-null float64
+    instrumentalness_std     1669 non-null float64
+    is_collaborative         1669 non-null int64
+    is_public                1669 non-null int64
+    key_avg                  1669 non-null float64
+    key_std                  1669 non-null float64
+    last_update              1669 non-null float64
+    liveness_avg             1669 non-null float64
+    liveness_std             1669 non-null float64
+    loudness_avg             1669 non-null float64
+    loudness_std             1669 non-null float64
+    mode_avg                 1669 non-null float64
+    mode_std                 1669 non-null float64
+    num_of_artists           1669 non-null int64
+    num_of_markets_avg       1669 non-null float64
+    num_of_songs             1669 non-null int64
+    playlist_name_length     1669 non-null int64
+    song_duration_avg        1669 non-null float64
+    song_duration_std        1669 non-null float64
+    song_popularity_avg      1669 non-null float64
+    song_popularity_std      1669 non-null float64
+    speechiness_avg          1669 non-null float64
+    speechiness_std          1669 non-null float64
+    tempo_avg                1669 non-null float64
+    tempo_std                1669 non-null float64
+    time_signature_avg       1669 non-null float64
+    time_signature_std       1669 non-null float64
+    valence_avg              1669 non-null float64
+    valence_std              1669 non-null float64
+    dtypes: float64(35), int64(7)
+    memory usage: 560.7 KB
+
+
+
+
+```python
+# Dropping features that present zero variance
+data.drop(['is_collaborative', 'is_public'], axis =1 , inplace= True)
+```
 
 
 
@@ -346,14 +349,14 @@ data1.head()
       <th></th>
       <th>acousticness_avg</th>
       <th>acousticness_std</th>
+      <th>artist_genres</th>
+      <th>artist_popularity_avg</th>
+      <th>artist_popularity_std</th>
       <th>danceability_avg</th>
       <th>danceability_std</th>
       <th>duration_ms_avg</th>
       <th>duration_ms_std</th>
       <th>energy_avg</th>
-      <th>energy_std</th>
-      <th>followers</th>
-      <th>instrumentalness_avg</th>
       <th>...</th>
       <th>song_popularity_avg</th>
       <th>song_popularity_std</th>
@@ -370,127 +373,127 @@ data1.head()
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.194584</td>
-      <td>0.171983</td>
-      <td>0.655940</td>
-      <td>0.113601</td>
-      <td>203916.7400</td>
-      <td>20848.451678</td>
-      <td>0.655220</td>
-      <td>0.140195</td>
-      <td>1403307</td>
-      <td>0.000076</td>
+      <td>0.201550</td>
+      <td>0.210138</td>
+      <td>35</td>
+      <td>89.831579</td>
+      <td>5.489996</td>
+      <td>0.672320</td>
+      <td>0.131615</td>
+      <td>207939.980000</td>
+      <td>31152.236684</td>
+      <td>0.657740</td>
       <td>...</td>
-      <td>80.5000</td>
-      <td>12.147839</td>
-      <td>0.081500</td>
-      <td>0.067375</td>
-      <td>111.175180</td>
-      <td>25.315509</td>
-      <td>4.0000</td>
+      <td>80.220000</td>
+      <td>16.306183</td>
+      <td>0.080678</td>
+      <td>0.050808</td>
+      <td>120.039820</td>
+      <td>27.196016</td>
+      <td>4.000000</td>
       <td>0.200000</td>
-      <td>0.422914</td>
-      <td>0.165588</td>
+      <td>0.419074</td>
+      <td>0.182246</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.236093</td>
-      <td>0.212474</td>
-      <td>0.641660</td>
-      <td>0.114543</td>
-      <td>217370.1500</td>
-      <td>50370.220381</td>
-      <td>0.705670</td>
-      <td>0.175782</td>
-      <td>2406903</td>
-      <td>0.010640</td>
+      <td>0.166715</td>
+      <td>0.199305</td>
+      <td>26</td>
+      <td>86.978261</td>
+      <td>9.056559</td>
+      <td>0.748429</td>
+      <td>0.133955</td>
+      <td>213376.040816</td>
+      <td>40248.254855</td>
+      <td>0.627816</td>
       <td>...</td>
-      <td>61.8900</td>
-      <td>15.681770</td>
-      <td>0.054565</td>
-      <td>0.039034</td>
-      <td>117.533380</td>
-      <td>21.954430</td>
-      <td>4.0000</td>
-      <td>0.000000</td>
-      <td>0.751000</td>
-      <td>0.199712</td>
+      <td>71.960000</td>
+      <td>20.083785</td>
+      <td>0.225245</td>
+      <td>0.134817</td>
+      <td>128.362633</td>
+      <td>29.037111</td>
+      <td>4.020408</td>
+      <td>0.246593</td>
+      <td>0.450592</td>
+      <td>0.208395</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>0.185966</td>
-      <td>0.173107</td>
-      <td>0.656162</td>
-      <td>0.114090</td>
-      <td>214918.4375</td>
-      <td>34896.851495</td>
-      <td>0.664425</td>
-      <td>0.148360</td>
-      <td>218518</td>
-      <td>0.004704</td>
+      <td>0.115828</td>
+      <td>0.128663</td>
+      <td>60</td>
+      <td>68.231481</td>
+      <td>16.317797</td>
+      <td>0.608870</td>
+      <td>0.146127</td>
+      <td>200221.962963</td>
+      <td>45993.631187</td>
+      <td>0.767889</td>
       <td>...</td>
-      <td>64.3750</td>
-      <td>13.414894</td>
-      <td>0.046010</td>
-      <td>0.022244</td>
-      <td>114.561925</td>
-      <td>21.994968</td>
-      <td>3.9875</td>
-      <td>0.193245</td>
-      <td>0.617387</td>
-      <td>0.211768</td>
+      <td>56.714286</td>
+      <td>22.988906</td>
+      <td>0.061541</td>
+      <td>0.041325</td>
+      <td>125.398907</td>
+      <td>25.782681</td>
+      <td>3.888889</td>
+      <td>0.566558</td>
+      <td>0.368354</td>
+      <td>0.202621</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>0.132846</td>
-      <td>0.117976</td>
-      <td>0.730612</td>
-      <td>0.081441</td>
-      <td>209974.0000</td>
-      <td>28768.262698</td>
-      <td>0.758163</td>
-      <td>0.113106</td>
-      <td>169453</td>
-      <td>0.003579</td>
+      <td>0.237346</td>
+      <td>0.209753</td>
+      <td>25</td>
+      <td>79.058824</td>
+      <td>12.442671</td>
+      <td>0.630980</td>
+      <td>0.127485</td>
+      <td>227396.918367</td>
+      <td>43566.385885</td>
+      <td>0.543082</td>
       <td>...</td>
-      <td>78.2875</td>
-      <td>11.201779</td>
-      <td>0.085573</td>
-      <td>0.053110</td>
-      <td>118.060038</td>
-      <td>29.990054</td>
-      <td>4.0000</td>
-      <td>0.000000</td>
-      <td>0.606237</td>
-      <td>0.201211</td>
+      <td>62.367347</td>
+      <td>15.297984</td>
+      <td>0.127398</td>
+      <td>0.102994</td>
+      <td>115.759082</td>
+      <td>29.865996</td>
+      <td>3.918367</td>
+      <td>0.528252</td>
+      <td>0.434865</td>
+      <td>0.191858</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0.032074</td>
-      <td>0.083080</td>
-      <td>0.487220</td>
-      <td>0.126472</td>
-      <td>206852.6000</td>
-      <td>31874.021837</td>
-      <td>0.803940</td>
-      <td>0.123784</td>
-      <td>473852</td>
-      <td>0.030798</td>
+      <td>0.049196</td>
+      <td>0.124658</td>
+      <td>70</td>
+      <td>72.625000</td>
+      <td>9.734993</td>
+      <td>0.530340</td>
+      <td>0.120331</td>
+      <td>221541.943396</td>
+      <td>28843.710922</td>
+      <td>0.787226</td>
       <td>...</td>
-      <td>55.6000</td>
-      <td>15.390906</td>
-      <td>0.071556</td>
-      <td>0.047209</td>
-      <td>127.606140</td>
-      <td>29.084261</td>
-      <td>3.9200</td>
-      <td>0.440000</td>
-      <td>0.557880</td>
-      <td>0.193230</td>
+      <td>59.415094</td>
+      <td>10.342136</td>
+      <td>0.063791</td>
+      <td>0.049612</td>
+      <td>126.416849</td>
+      <td>25.883036</td>
+      <td>3.905660</td>
+      <td>0.445699</td>
+      <td>0.508849</td>
+      <td>0.204985</td>
     </tr>
   </tbody>
 </table>
-<p>5 rows × 35 columns</p>
+<p>5 rows × 40 columns</p>
 </div>
 
 
@@ -502,7 +505,7 @@ data2 = data1.corr()
 plt.figure(figsize= (20,20))
 plt.pcolor(data2)
 plt.yticks(np.arange(0.5, len(data2.index), 1), data2.index)
-plt.xticks(np.arange(0.5, len(data2.columns), 1), data2.columns)
+plt.xticks(np.arange(0.5, len(data2.columns), 1), data2.columns, rotation = 90)
 plt.colorbar()
 ```
 
@@ -510,12 +513,12 @@ plt.colorbar()
 
 
 
-    <matplotlib.colorbar.Colorbar at 0x7fd52e337668>
+    <matplotlib.colorbar.Colorbar at 0x7f543f094950>
 
 
 
 
-![png](EDA_files/EDA_9_1.png)
+![png](EDA_files/EDA_8_1.png)
 
 
 
@@ -525,42 +528,47 @@ print('correlation of num of followers with other variables: ', data2['followers
 ```
 
 
-    correlation of num of followers with other variables:  acousticness_avg       -0.014110
-    acousticness_std       -0.015744
-    danceability_avg        0.020093
-    danceability_std        0.015288
-    duration_ms_avg        -0.032318
-    duration_ms_std        -0.037395
-    energy_avg             -0.005703
-    energy_std             -0.041394
-    followers               1.000000
-    instrumentalness_avg    0.026129
-    instrumentalness_std   -0.008571
-    is_public              -0.029503
-    key_avg                -0.009474
-    key_std                 0.024899
-    liveness_avg           -0.048286
-    liveness_std           -0.013935
-    loudness_avg           -0.000822
-    loudness_std           -0.009443
-    mode_avg                0.002988
-    mode_std                0.023697
-    no_of_songs            -0.060895
-    num_of_artists          0.096386
-    num_of_markets_avg      0.016582
-    song_duration_avg      -0.032328
-    song_duration_std      -0.037526
-    song_popularity_avg     0.217564
-    song_popularity_std    -0.069118
-    speechiness_avg        -0.034887
-    speechiness_std        -0.025511
-    tempo_avg              -0.047284
-    tempo_std              -0.016527
-    time_signature_avg      0.033141
-    time_signature_std     -0.006531
-    valence_avg            -0.033542
-    valence_std             0.002623
-    Name: followers, dtype: float64
+    ('correlation of num of followers with other variables: ', acousticness_avg        -0.045700
+    acousticness_std        -0.033745
+    artist_genres            0.019638
+    artist_popularity_avg    0.188133
+    artist_popularity_std   -0.113067
+    danceability_avg         0.099056
+    danceability_std        -0.041406
+    duration_ms_avg         -0.064743
+    duration_ms_std         -0.081939
+    energy_avg               0.025317
+    energy_std              -0.068110
+    first_update             0.247618
+    followers                1.000000
+    instrumentalness_avg    -0.022965
+    instrumentalness_std    -0.099799
+    key_avg                 -0.019788
+    key_std                  0.035601
+    last_update              0.252990
+    liveness_avg            -0.074864
+    liveness_std            -0.063847
+    loudness_avg             0.068744
+    loudness_std            -0.098970
+    mode_avg                -0.046275
+    mode_std                 0.042740
+    num_of_artists           0.157821
+    num_of_markets_avg       0.036694
+    num_of_songs             0.072532
+    playlist_name_length    -0.101182
+    song_duration_avg       -0.061018
+    song_duration_std       -0.058117
+    song_popularity_avg      0.346298
+    song_popularity_std     -0.045608
+    speechiness_avg         -0.051610
+    speechiness_std         -0.039622
+    tempo_avg                0.014758
+    tempo_std               -0.032355
+    time_signature_avg       0.067693
+    time_signature_std      -0.057707
+    valence_avg             -0.024068
+    valence_std             -0.039637
+    Name: followers, dtype: float64)
 
 
 We can see that the correlation of the number of followers is very low with all other variables
@@ -575,7 +583,7 @@ data3 = data1.copy()
 
 
 ```python
-data3['followers'] = np.log2(data3['followers'])
+data3['followers'] = np.log(1 + data3['followers'])
 ```
 
 
@@ -586,43 +594,47 @@ print('correlation of log of followers with other variables: \n', data3.corr()['
 ```
 
 
-    correlation of log of followers with other variables: 
-     acousticness_avg       -0.071257
-    acousticness_std       -0.038489
-    danceability_avg        0.001092
-    danceability_std        0.003287
-    duration_ms_avg        -0.001585
-    duration_ms_std        -0.031310
-    energy_avg              0.065630
-    energy_std             -0.083398
-    followers               1.000000
-    instrumentalness_avg    0.039748
-    instrumentalness_std    0.026376
-    is_public              -0.274205
-    key_avg                 0.007341
-    key_std                 0.039360
-    liveness_avg           -0.047241
-    liveness_std           -0.020115
-    loudness_avg            0.035245
-    loudness_std           -0.060209
-    mode_avg               -0.071120
-    mode_std                0.101717
-    no_of_songs            -0.142433
-    num_of_artists          0.113254
-    num_of_markets_avg      0.093902
-    song_duration_avg      -0.001601
-    song_duration_std      -0.031016
-    song_popularity_avg     0.211187
-    song_popularity_std    -0.128803
-    speechiness_avg        -0.042598
-    speechiness_std        -0.037265
-    tempo_avg              -0.021107
-    tempo_std              -0.052830
-    time_signature_avg      0.070443
-    time_signature_std     -0.027027
-    valence_avg            -0.088790
-    valence_std            -0.034855
-    Name: followers, dtype: float64
+    ('correlation of log of followers with other variables: \n', acousticness_avg         0.034465
+    acousticness_std        -0.147682
+    artist_genres           -0.044709
+    artist_popularity_avg    0.109756
+    artist_popularity_std   -0.274838
+    danceability_avg        -0.004691
+    danceability_std        -0.123413
+    duration_ms_avg         -0.006092
+    duration_ms_std         -0.039058
+    energy_avg              -0.046161
+    energy_std              -0.187641
+    first_update             0.669878
+    followers                1.000000
+    instrumentalness_avg     0.079302
+    instrumentalness_std    -0.056911
+    key_avg                  0.010541
+    key_std                 -0.017376
+    last_update              0.711905
+    liveness_avg            -0.086897
+    liveness_std            -0.132874
+    loudness_avg            -0.032210
+    loudness_std            -0.047277
+    mode_avg                -0.043815
+    mode_std                 0.059393
+    num_of_artists           0.306043
+    num_of_markets_avg       0.224317
+    num_of_songs             0.214065
+    playlist_name_length    -0.045765
+    song_duration_avg       -0.019318
+    song_duration_std       -0.056313
+    song_popularity_avg      0.407934
+    song_popularity_std     -0.262560
+    speechiness_avg         -0.020832
+    speechiness_std         -0.093477
+    tempo_avg               -0.017509
+    tempo_std               -0.020939
+    time_signature_avg       0.035218
+    time_signature_std       0.008535
+    valence_avg             -0.110466
+    valence_std             -0.138230
+    Name: followers, dtype: float64)
 
 
 
@@ -650,28 +662,28 @@ results.summary()
 <table class="simpletable">
 <caption>OLS Regression Results</caption>
 <tr>
-  <th>Dep. Variable:</th>        <td>followers</td>    <th>  R-squared:         </th> <td>   0.093</td> 
+  <th>Dep. Variable:</th>        <td>followers</td>    <th>  R-squared:         </th> <td>   0.175</td> 
 </tr>
 <tr>
-  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.077</td> 
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.156</td> 
 </tr>
 <tr>
-  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   6.030</td> 
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   8.876</td> 
 </tr>
 <tr>
-  <th>Date:</th>             <td>Sun, 03 Dec 2017</td> <th>  Prob (F-statistic):</th> <td>8.22e-25</td> 
+  <th>Date:</th>             <td>Thu, 07 Dec 2017</td> <th>  Prob (F-statistic):</th> <td>2.52e-45</td> 
 </tr>
 <tr>
-  <th>Time:</th>                 <td>23:40:54</td>     <th>  Log-Likelihood:    </th> <td> -28419.</td> 
+  <th>Time:</th>                 <td>16:44:16</td>     <th>  Log-Likelihood:    </th> <td> -24607.</td> 
 </tr>
 <tr>
-  <th>No. Observations:</th>      <td>  2043</td>      <th>  AIC:               </th> <td>5.691e+04</td>
+  <th>No. Observations:</th>      <td>  1669</td>      <th>  AIC:               </th> <td>4.929e+04</td>
 </tr>
 <tr>
-  <th>Df Residuals:</th>          <td>  2008</td>      <th>  BIC:               </th> <td>5.710e+04</td>
+  <th>Df Residuals:</th>          <td>  1629</td>      <th>  BIC:               </th> <td>4.951e+04</td>
 </tr>
 <tr>
-  <th>Df Model:</th>              <td>    34</td>      <th>                     </th>     <td> </td>    
+  <th>Df Model:</th>              <td>    39</td>      <th>                     </th>     <td> </td>    
 </tr>
 <tr>
   <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>    
@@ -679,126 +691,141 @@ results.summary()
 </table>
 <table class="simpletable">
 <tr>
-            <td></td>              <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+            <td></td>               <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
 </tr>
 <tr>
-  <th>const</th>                <td>-8.573e+05</td> <td> 4.06e+05</td> <td>   -2.114</td> <td> 0.035</td> <td>-1.65e+06</td> <td>-6.18e+04</td>
+  <th>const</th>                 <td> -2.05e+06</td> <td> 9.62e+05</td> <td>   -2.130</td> <td> 0.033</td> <td>-3.94e+06</td> <td>-1.62e+05</td>
 </tr>
 <tr>
-  <th>acousticness_avg</th>     <td> 8.085e+04</td> <td> 8.89e+04</td> <td>    0.909</td> <td> 0.363</td> <td>-9.36e+04</td> <td> 2.55e+05</td>
+  <th>acousticness_avg</th>      <td> 1.352e+05</td> <td> 1.96e+05</td> <td>    0.691</td> <td> 0.490</td> <td>-2.49e+05</td> <td> 5.19e+05</td>
 </tr>
 <tr>
-  <th>acousticness_std</th>     <td> 1.515e+05</td> <td> 1.42e+05</td> <td>    1.065</td> <td> 0.287</td> <td>-1.27e+05</td> <td>  4.3e+05</td>
+  <th>acousticness_std</th>      <td> 2.393e+04</td> <td> 3.25e+05</td> <td>    0.074</td> <td> 0.941</td> <td>-6.14e+05</td> <td> 6.62e+05</td>
 </tr>
 <tr>
-  <th>danceability_avg</th>     <td> 7161.7792</td> <td> 1.31e+05</td> <td>    0.055</td> <td> 0.956</td> <td>-2.49e+05</td> <td> 2.64e+05</td>
+  <th>artist_genres</th>         <td> -284.3105</td> <td>  662.189</td> <td>   -0.429</td> <td> 0.668</td> <td>-1583.142</td> <td> 1014.521</td>
 </tr>
 <tr>
-  <th>danceability_std</th>     <td> 3.075e+05</td> <td> 3.14e+05</td> <td>    0.980</td> <td> 0.327</td> <td>-3.08e+05</td> <td> 9.23e+05</td>
+  <th>artist_popularity_avg</th> <td>-1143.7151</td> <td> 2140.779</td> <td>   -0.534</td> <td> 0.593</td> <td>-5342.686</td> <td> 3055.255</td>
 </tr>
 <tr>
-  <th>duration_ms_avg</th>      <td>   10.2485</td> <td>   13.282</td> <td>    0.772</td> <td> 0.440</td> <td>  -15.799</td> <td>   36.296</td>
+  <th>artist_popularity_std</th> <td>  680.5916</td> <td> 4127.839</td> <td>    0.165</td> <td> 0.869</td> <td>-7415.840</td> <td> 8777.023</td>
 </tr>
 <tr>
-  <th>duration_ms_std</th>      <td>    3.7668</td> <td>    7.266</td> <td>    0.518</td> <td> 0.604</td> <td>  -10.483</td> <td>   18.016</td>
+  <th>danceability_avg</th>      <td> 5.665e+05</td> <td> 3.08e+05</td> <td>    1.840</td> <td> 0.066</td> <td>-3.74e+04</td> <td> 1.17e+06</td>
 </tr>
 <tr>
-  <th>energy_avg</th>           <td> 1.643e+05</td> <td> 1.62e+05</td> <td>    1.017</td> <td> 0.309</td> <td>-1.53e+05</td> <td> 4.81e+05</td>
+  <th>danceability_std</th>      <td>  1.13e+05</td> <td> 7.82e+05</td> <td>    0.144</td> <td> 0.885</td> <td>-1.42e+06</td> <td> 1.65e+06</td>
 </tr>
 <tr>
-  <th>energy_std</th>           <td>-4.153e+05</td> <td> 2.81e+05</td> <td>   -1.479</td> <td> 0.139</td> <td>-9.66e+05</td> <td> 1.35e+05</td>
+  <th>duration_ms_avg</th>       <td>   -1.3612</td> <td>    2.812</td> <td>   -0.484</td> <td> 0.628</td> <td>   -6.877</td> <td>    4.155</td>
 </tr>
 <tr>
-  <th>instrumentalness_avg</th> <td> 1.416e+05</td> <td> 5.71e+04</td> <td>    2.479</td> <td> 0.013</td> <td> 2.96e+04</td> <td> 2.54e+05</td>
+  <th>duration_ms_std</th>       <td>    0.7180</td> <td>    0.995</td> <td>    0.722</td> <td> 0.471</td> <td>   -1.234</td> <td>    2.670</td>
 </tr>
 <tr>
-  <th>instrumentalness_std</th> <td> 4.538e+04</td> <td> 7.79e+04</td> <td>    0.583</td> <td> 0.560</td> <td>-1.07e+05</td> <td> 1.98e+05</td>
+  <th>energy_avg</th>            <td> 1.051e+05</td> <td>  3.7e+05</td> <td>    0.284</td> <td> 0.777</td> <td>-6.21e+05</td> <td> 8.32e+05</td>
 </tr>
 <tr>
-  <th>is_public</th>            <td>-1.819e+04</td> <td> 1.44e+04</td> <td>   -1.261</td> <td> 0.207</td> <td>-4.65e+04</td> <td> 1.01e+04</td>
+  <th>energy_std</th>            <td> 3.337e+04</td> <td> 6.16e+05</td> <td>    0.054</td> <td> 0.957</td> <td>-1.17e+06</td> <td> 1.24e+06</td>
 </tr>
 <tr>
-  <th>key_avg</th>              <td>  744.2960</td> <td> 9899.508</td> <td>    0.075</td> <td> 0.940</td> <td>-1.87e+04</td> <td> 2.02e+04</td>
+  <th>first_update</th>          <td>   -0.0006</td> <td>    0.001</td> <td>   -0.575</td> <td> 0.565</td> <td>   -0.002</td> <td>    0.001</td>
 </tr>
 <tr>
-  <th>key_std</th>              <td>-5659.5440</td> <td> 2.14e+04</td> <td>   -0.264</td> <td> 0.792</td> <td>-4.77e+04</td> <td> 3.64e+04</td>
+  <th>instrumentalness_avg</th>  <td> 6.021e+04</td> <td> 1.27e+05</td> <td>    0.475</td> <td> 0.635</td> <td>-1.88e+05</td> <td> 3.09e+05</td>
 </tr>
 <tr>
-  <th>liveness_avg</th>         <td>-3.806e+05</td> <td> 1.95e+05</td> <td>   -1.956</td> <td> 0.051</td> <td>-7.62e+05</td> <td>  954.821</td>
+  <th>instrumentalness_std</th>  <td>-3.453e+04</td> <td> 1.92e+05</td> <td>   -0.180</td> <td> 0.857</td> <td>-4.11e+05</td> <td> 3.41e+05</td>
 </tr>
 <tr>
-  <th>liveness_std</th>         <td> 5.737e+05</td> <td> 2.11e+05</td> <td>    2.720</td> <td> 0.007</td> <td>  1.6e+05</td> <td> 9.87e+05</td>
+  <th>key_avg</th>               <td> 3268.6127</td> <td> 2.53e+04</td> <td>    0.129</td> <td> 0.897</td> <td>-4.63e+04</td> <td> 5.29e+04</td>
 </tr>
 <tr>
-  <th>loudness_avg</th>         <td>-2025.9964</td> <td> 5733.843</td> <td>   -0.353</td> <td> 0.724</td> <td>-1.33e+04</td> <td> 9218.908</td>
+  <th>key_std</th>               <td> 2.903e+04</td> <td> 5.54e+04</td> <td>    0.524</td> <td> 0.601</td> <td>-7.97e+04</td> <td> 1.38e+05</td>
 </tr>
 <tr>
-  <th>loudness_std</th>         <td> 7260.5060</td> <td> 1.17e+04</td> <td>    0.620</td> <td> 0.535</td> <td>-1.57e+04</td> <td> 3.02e+04</td>
+  <th>last_update</th>           <td>    0.0015</td> <td>    0.001</td> <td>    1.453</td> <td> 0.146</td> <td>   -0.001</td> <td>    0.004</td>
 </tr>
 <tr>
-  <th>mode_avg</th>             <td> 1.447e+05</td> <td> 6.88e+04</td> <td>    2.102</td> <td> 0.036</td> <td> 9673.073</td> <td>  2.8e+05</td>
+  <th>liveness_avg</th>          <td>-3.864e+05</td> <td> 3.83e+05</td> <td>   -1.010</td> <td> 0.313</td> <td>-1.14e+06</td> <td> 3.64e+05</td>
 </tr>
 <tr>
-  <th>mode_std</th>             <td>  6.77e+04</td> <td> 1.34e+05</td> <td>    0.507</td> <td> 0.612</td> <td>-1.94e+05</td> <td>  3.3e+05</td>
+  <th>liveness_std</th>          <td> 2.523e+05</td> <td> 4.56e+05</td> <td>    0.554</td> <td> 0.580</td> <td>-6.41e+05</td> <td> 1.15e+06</td>
 </tr>
 <tr>
-  <th>no_of_songs</th>          <td>  -65.3979</td> <td>   26.424</td> <td>   -2.475</td> <td> 0.013</td> <td> -117.219</td> <td>  -13.577</td>
+  <th>loudness_avg</th>          <td> 2865.1148</td> <td> 1.25e+04</td> <td>    0.229</td> <td> 0.819</td> <td>-2.16e+04</td> <td> 2.74e+04</td>
 </tr>
 <tr>
-  <th>num_of_artists</th>       <td>  786.2935</td> <td>  187.082</td> <td>    4.203</td> <td> 0.000</td> <td>  419.397</td> <td> 1153.189</td>
+  <th>loudness_std</th>          <td>-1779.2244</td> <td> 2.62e+04</td> <td>   -0.068</td> <td> 0.946</td> <td>-5.32e+04</td> <td> 4.97e+04</td>
 </tr>
 <tr>
-  <th>num_of_markets_avg</th>   <td>-1695.0592</td> <td>  485.324</td> <td>   -3.493</td> <td> 0.000</td> <td>-2646.850</td> <td> -743.269</td>
+  <th>mode_avg</th>              <td> 2.063e+05</td> <td> 2.03e+05</td> <td>    1.018</td> <td> 0.309</td> <td>-1.91e+05</td> <td> 6.04e+05</td>
 </tr>
 <tr>
-  <th>song_duration_avg</th>    <td>  -10.3430</td> <td>   13.289</td> <td>   -0.778</td> <td> 0.436</td> <td>  -36.404</td> <td>   15.718</td>
+  <th>mode_std</th>              <td> 2.223e+05</td> <td> 3.69e+05</td> <td>    0.602</td> <td> 0.547</td> <td>-5.02e+05</td> <td> 9.46e+05</td>
 </tr>
 <tr>
-  <th>song_duration_std</th>    <td>   -3.7636</td> <td>    7.253</td> <td>   -0.519</td> <td> 0.604</td> <td>  -17.988</td> <td>   10.461</td>
+  <th>num_of_artists</th>        <td> 1800.4813</td> <td>  624.631</td> <td>    2.882</td> <td> 0.004</td> <td>  575.318</td> <td> 3025.645</td>
 </tr>
 <tr>
-  <th>song_popularity_avg</th>  <td> 5330.2962</td> <td>  532.506</td> <td>   10.010</td> <td> 0.000</td> <td> 4285.974</td> <td> 6374.618</td>
+  <th>num_of_markets_avg</th>    <td>-5495.6106</td> <td> 1597.656</td> <td>   -3.440</td> <td> 0.001</td> <td>-8629.287</td> <td>-2361.934</td>
 </tr>
 <tr>
-  <th>song_popularity_std</th>  <td>-6312.4021</td> <td> 1392.151</td> <td>   -4.534</td> <td> 0.000</td> <td>-9042.614</td> <td>-3582.191</td>
+  <th>num_of_songs</th>          <td>  306.5917</td> <td>  272.275</td> <td>    1.126</td> <td> 0.260</td> <td> -227.455</td> <td>  840.639</td>
 </tr>
 <tr>
-  <th>speechiness_avg</th>      <td> 1.065e+05</td> <td> 1.45e+05</td> <td>    0.736</td> <td> 0.462</td> <td>-1.77e+05</td> <td>  3.9e+05</td>
+  <th>playlist_name_length</th>  <td>-3730.1838</td> <td> 2312.914</td> <td>   -1.613</td> <td> 0.107</td> <td>-8266.783</td> <td>  806.415</td>
 </tr>
 <tr>
-  <th>speechiness_std</th>      <td>-3.248e+05</td> <td> 2.48e+05</td> <td>   -1.309</td> <td> 0.191</td> <td>-8.11e+05</td> <td> 1.62e+05</td>
+  <th>song_duration_avg</th>     <td>    1.1164</td> <td>    2.777</td> <td>    0.402</td> <td> 0.688</td> <td>   -4.331</td> <td>    6.564</td>
 </tr>
 <tr>
-  <th>tempo_avg</th>            <td>   12.7515</td> <td>  882.048</td> <td>    0.014</td> <td> 0.988</td> <td>-1717.074</td> <td> 1742.577</td>
+  <th>song_duration_std</th>     <td>   -0.3696</td> <td>    0.940</td> <td>   -0.393</td> <td> 0.694</td> <td>   -2.213</td> <td>    1.474</td>
 </tr>
 <tr>
-  <th>tempo_std</th>            <td> -276.0361</td> <td> 1208.885</td> <td>   -0.228</td> <td> 0.819</td> <td>-2646.836</td> <td> 2094.764</td>
+  <th>song_popularity_avg</th>   <td> 1.644e+04</td> <td> 2097.925</td> <td>    7.836</td> <td> 0.000</td> <td> 1.23e+04</td> <td> 2.06e+04</td>
 </tr>
 <tr>
-  <th>time_signature_avg</th>   <td>  1.46e+05</td> <td> 8.21e+04</td> <td>    1.778</td> <td> 0.076</td> <td>-1.51e+04</td> <td> 3.07e+05</td>
+  <th>song_popularity_std</th>   <td>-1.186e+04</td> <td> 4185.899</td> <td>   -2.834</td> <td> 0.005</td> <td>-2.01e+04</td> <td>-3651.605</td>
 </tr>
 <tr>
-  <th>time_signature_std</th>   <td> 8.382e+04</td> <td>    5e+04</td> <td>    1.676</td> <td> 0.094</td> <td>-1.43e+04</td> <td> 1.82e+05</td>
+  <th>speechiness_avg</th>       <td>  2.62e+05</td> <td> 2.44e+05</td> <td>    1.071</td> <td> 0.284</td> <td>-2.18e+05</td> <td> 7.42e+05</td>
 </tr>
 <tr>
-  <th>valence_avg</th>          <td> 1.653e+04</td> <td> 7.97e+04</td> <td>    0.207</td> <td> 0.836</td> <td> -1.4e+05</td> <td> 1.73e+05</td>
+  <th>speechiness_std</th>       <td>-6.318e+04</td> <td> 3.81e+05</td> <td>   -0.166</td> <td> 0.868</td> <td>-8.11e+05</td> <td> 6.85e+05</td>
 </tr>
 <tr>
-  <th>valence_std</th>          <td>-4.531e+04</td> <td> 1.95e+05</td> <td>   -0.232</td> <td> 0.816</td> <td>-4.28e+05</td> <td> 3.38e+05</td>
+  <th>tempo_avg</th>             <td> 1623.8104</td> <td> 2374.750</td> <td>    0.684</td> <td> 0.494</td> <td>-3034.074</td> <td> 6281.695</td>
+</tr>
+<tr>
+  <th>tempo_std</th>             <td>  356.7017</td> <td> 3184.411</td> <td>    0.112</td> <td> 0.911</td> <td>-5889.270</td> <td> 6602.673</td>
+</tr>
+<tr>
+  <th>time_signature_avg</th>    <td>-1.992e+04</td> <td> 1.31e+05</td> <td>   -0.152</td> <td> 0.879</td> <td>-2.78e+05</td> <td> 2.38e+05</td>
+</tr>
+<tr>
+  <th>time_signature_std</th>    <td>  1.05e+05</td> <td> 1.02e+05</td> <td>    1.029</td> <td> 0.304</td> <td>-9.51e+04</td> <td> 3.05e+05</td>
+</tr>
+<tr>
+  <th>valence_avg</th>           <td>-2.685e+05</td> <td> 1.97e+05</td> <td>   -1.366</td> <td> 0.172</td> <td>-6.54e+05</td> <td> 1.17e+05</td>
+</tr>
+<tr>
+  <th>valence_std</th>           <td>-3.725e+05</td> <td> 4.97e+05</td> <td>   -0.750</td> <td> 0.453</td> <td>-1.35e+06</td> <td> 6.02e+05</td>
 </tr>
 </table>
 <table class="simpletable">
 <tr>
-  <th>Omnibus:</th>       <td>2139.040</td> <th>  Durbin-Watson:     </th>  <td>   1.806</td> 
+  <th>Omnibus:</th>       <td>3357.684</td> <th>  Durbin-Watson:     </th>   <td>   0.625</td>  
 </tr>
 <tr>
-  <th>Prob(Omnibus):</th>  <td> 0.000</td>  <th>  Jarque-Bera (JB):  </th> <td>133426.502</td>
+  <th>Prob(Omnibus):</th>  <td> 0.000</td>  <th>  Jarque-Bera (JB):  </th> <td>10717432.555</td>
 </tr>
 <tr>
-  <th>Skew:</th>           <td> 5.173</td>  <th>  Prob(JB):          </th>  <td>    0.00</td> 
+  <th>Skew:</th>           <td>15.691</td>  <th>  Prob(JB):          </th>   <td>    0.00</td>  
 </tr>
 <tr>
-  <th>Kurtosis:</th>       <td>41.215</td>  <th>  Cond. No.          </th>  <td>2.55e+07</td> 
+  <th>Kurtosis:</th>       <td>394.319</td> <th>  Cond. No.          </th>   <td>1.37e+11</td>  
 </tr>
 </table>
 
@@ -825,7 +852,7 @@ X2.shape, y2.shape
 
 
 
-    ((2043, 34), (2043,))
+    ((1669, 39), (1669,))
 
 
 
@@ -845,28 +872,28 @@ results.summary()
 <table class="simpletable">
 <caption>OLS Regression Results</caption>
 <tr>
-  <th>Dep. Variable:</th>        <td>followers</td>    <th>  R-squared:         </th> <td>   0.211</td> 
+  <th>Dep. Variable:</th>        <td>followers</td>    <th>  R-squared:         </th> <td>   0.606</td> 
 </tr>
 <tr>
-  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.198</td> 
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.596</td> 
 </tr>
 <tr>
-  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   15.81</td> 
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   64.15</td> 
 </tr>
 <tr>
-  <th>Date:</th>             <td>Sun, 03 Dec 2017</td> <th>  Prob (F-statistic):</th> <td>3.47e-80</td> 
+  <th>Date:</th>             <td>Thu, 07 Dec 2017</td> <th>  Prob (F-statistic):</th> <td>2.19e-296</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>23:41:15</td>     <th>  Log-Likelihood:    </th> <td> -5070.9</td> 
+  <th>Time:</th>                 <td>16:44:18</td>     <th>  Log-Likelihood:    </th> <td> -3596.3</td> 
 </tr>
 <tr>
-  <th>No. Observations:</th>      <td>  2043</td>      <th>  AIC:               </th> <td>1.021e+04</td>
+  <th>No. Observations:</th>      <td>  1669</td>      <th>  AIC:               </th> <td>   7273.</td> 
 </tr>
 <tr>
-  <th>Df Residuals:</th>          <td>  2008</td>      <th>  BIC:               </th> <td>1.041e+04</td>
+  <th>Df Residuals:</th>          <td>  1629</td>      <th>  BIC:               </th> <td>   7489.</td> 
 </tr>
 <tr>
-  <th>Df Model:</th>              <td>    34</td>      <th>                     </th>     <td> </td>    
+  <th>Df Model:</th>              <td>    39</td>      <th>                     </th>     <td> </td>    
 </tr>
 <tr>
   <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>    
@@ -874,126 +901,141 @@ results.summary()
 </table>
 <table class="simpletable">
 <tr>
-            <td></td>              <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+            <td></td>               <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
 </tr>
 <tr>
-  <th>const</th>                <td>   -6.0692</td> <td>    4.414</td> <td>   -1.375</td> <td> 0.169</td> <td>  -14.726</td> <td>    2.588</td>
+  <th>const</th>                 <td>  -50.1709</td> <td>    3.281</td> <td>  -15.292</td> <td> 0.000</td> <td>  -56.606</td> <td>  -43.736</td>
 </tr>
 <tr>
-  <th>acousticness_avg</th>     <td>    2.8607</td> <td>    0.968</td> <td>    2.955</td> <td> 0.003</td> <td>    0.962</td> <td>    4.759</td>
+  <th>acousticness_avg</th>      <td>   -0.5296</td> <td>    0.667</td> <td>   -0.794</td> <td> 0.427</td> <td>   -1.838</td> <td>    0.779</td>
 </tr>
 <tr>
-  <th>acousticness_std</th>     <td>    4.8468</td> <td>    1.547</td> <td>    3.132</td> <td> 0.002</td> <td>    1.812</td> <td>    7.881</td>
+  <th>acousticness_std</th>      <td>    0.5158</td> <td>    1.110</td> <td>    0.465</td> <td> 0.642</td> <td>   -1.661</td> <td>    2.693</td>
 </tr>
 <tr>
-  <th>danceability_avg</th>     <td>    1.7853</td> <td>    1.424</td> <td>    1.254</td> <td> 0.210</td> <td>   -1.006</td> <td>    4.577</td>
+  <th>artist_genres</th>         <td>   -0.0007</td> <td>    0.002</td> <td>   -0.328</td> <td> 0.743</td> <td>   -0.005</td> <td>    0.004</td>
 </tr>
 <tr>
-  <th>danceability_std</th>     <td>    5.2791</td> <td>    3.416</td> <td>    1.545</td> <td> 0.122</td> <td>   -1.420</td> <td>   11.978</td>
+  <th>artist_popularity_avg</th> <td>   -0.0003</td> <td>    0.007</td> <td>   -0.047</td> <td> 0.962</td> <td>   -0.015</td> <td>    0.014</td>
 </tr>
 <tr>
-  <th>duration_ms_avg</th>      <td> 6.258e-05</td> <td>    0.000</td> <td>    0.433</td> <td> 0.665</td> <td>   -0.000</td> <td>    0.000</td>
+  <th>artist_popularity_std</th> <td>   -0.0506</td> <td>    0.014</td> <td>   -3.598</td> <td> 0.000</td> <td>   -0.078</td> <td>   -0.023</td>
 </tr>
 <tr>
-  <th>duration_ms_std</th>      <td> 1.516e-06</td> <td> 7.91e-05</td> <td>    0.019</td> <td> 0.985</td> <td>   -0.000</td> <td>    0.000</td>
+  <th>danceability_avg</th>      <td>   -0.5647</td> <td>    1.050</td> <td>   -0.538</td> <td> 0.591</td> <td>   -2.624</td> <td>    1.494</td>
 </tr>
 <tr>
-  <th>energy_avg</th>           <td>    9.1307</td> <td>    1.759</td> <td>    5.190</td> <td> 0.000</td> <td>    5.681</td> <td>   12.581</td>
+  <th>danceability_std</th>      <td>    6.6558</td> <td>    2.668</td> <td>    2.495</td> <td> 0.013</td> <td>    1.423</td> <td>   11.889</td>
 </tr>
 <tr>
-  <th>energy_std</th>           <td>   -6.2808</td> <td>    3.055</td> <td>   -2.056</td> <td> 0.040</td> <td>  -12.272</td> <td>   -0.290</td>
+  <th>duration_ms_avg</th>       <td>  -1.7e-05</td> <td> 9.59e-06</td> <td>   -1.773</td> <td> 0.076</td> <td>-3.58e-05</td> <td> 1.81e-06</td>
 </tr>
 <tr>
-  <th>instrumentalness_avg</th> <td>    1.2137</td> <td>    0.622</td> <td>    1.952</td> <td> 0.051</td> <td>   -0.006</td> <td>    2.433</td>
+  <th>duration_ms_std</th>       <td>  5.95e-06</td> <td> 3.39e-06</td> <td>    1.754</td> <td> 0.080</td> <td>-7.05e-07</td> <td> 1.26e-05</td>
 </tr>
 <tr>
-  <th>instrumentalness_std</th> <td>    1.1086</td> <td>    0.848</td> <td>    1.308</td> <td> 0.191</td> <td>   -0.554</td> <td>    2.771</td>
+  <th>energy_avg</th>            <td>   -1.1135</td> <td>    1.263</td> <td>   -0.882</td> <td> 0.378</td> <td>   -3.590</td> <td>    1.364</td>
 </tr>
 <tr>
-  <th>is_public</th>            <td>   -1.9857</td> <td>    0.157</td> <td>  -12.650</td> <td> 0.000</td> <td>   -2.294</td> <td>   -1.678</td>
+  <th>energy_std</th>            <td>   -5.5955</td> <td>    2.099</td> <td>   -2.666</td> <td> 0.008</td> <td>   -9.712</td> <td>   -1.479</td>
 </tr>
 <tr>
-  <th>key_avg</th>              <td>   -0.0632</td> <td>    0.108</td> <td>   -0.587</td> <td> 0.557</td> <td>   -0.275</td> <td>    0.148</td>
+  <th>first_update</th>          <td>-5.887e-09</td> <td> 3.36e-09</td> <td>   -1.753</td> <td> 0.080</td> <td>-1.25e-08</td> <td>    7e-10</td>
 </tr>
 <tr>
-  <th>key_std</th>              <td>    0.0428</td> <td>    0.233</td> <td>    0.184</td> <td> 0.854</td> <td>   -0.415</td> <td>    0.500</td>
+  <th>instrumentalness_avg</th>  <td>   -0.1043</td> <td>    0.432</td> <td>   -0.241</td> <td> 0.809</td> <td>   -0.952</td> <td>    0.743</td>
 </tr>
 <tr>
-  <th>liveness_avg</th>         <td>   -7.0775</td> <td>    2.118</td> <td>   -3.342</td> <td> 0.001</td> <td>  -11.230</td> <td>   -2.925</td>
+  <th>instrumentalness_std</th>  <td>    0.8034</td> <td>    0.654</td> <td>    1.229</td> <td> 0.219</td> <td>   -0.479</td> <td>    2.085</td>
 </tr>
 <tr>
-  <th>liveness_std</th>         <td>    6.2579</td> <td>    2.295</td> <td>    2.727</td> <td> 0.006</td> <td>    1.757</td> <td>   10.759</td>
+  <th>key_avg</th>               <td>    0.1720</td> <td>    0.086</td> <td>    1.996</td> <td> 0.046</td> <td>    0.003</td> <td>    0.341</td>
 </tr>
 <tr>
-  <th>loudness_avg</th>         <td>   -0.1545</td> <td>    0.062</td> <td>   -2.475</td> <td> 0.013</td> <td>   -0.277</td> <td>   -0.032</td>
+  <th>key_std</th>               <td>   -0.0531</td> <td>    0.189</td> <td>   -0.281</td> <td> 0.779</td> <td>   -0.424</td> <td>    0.318</td>
 </tr>
 <tr>
-  <th>loudness_std</th>         <td>   -0.0921</td> <td>    0.127</td> <td>   -0.723</td> <td> 0.470</td> <td>   -0.342</td> <td>    0.158</td>
+  <th>last_update</th>           <td> 4.295e-08</td> <td> 3.53e-09</td> <td>   12.153</td> <td> 0.000</td> <td>  3.6e-08</td> <td> 4.99e-08</td>
 </tr>
 <tr>
-  <th>mode_avg</th>             <td>    1.3427</td> <td>    0.749</td> <td>    1.793</td> <td> 0.073</td> <td>   -0.126</td> <td>    2.812</td>
+  <th>liveness_avg</th>          <td>    1.3219</td> <td>    1.305</td> <td>    1.013</td> <td> 0.311</td> <td>   -1.237</td> <td>    3.881</td>
 </tr>
 <tr>
-  <th>mode_std</th>             <td>    2.2939</td> <td>    1.454</td> <td>    1.578</td> <td> 0.115</td> <td>   -0.557</td> <td>    5.145</td>
+  <th>liveness_std</th>          <td>   -3.0261</td> <td>    1.554</td> <td>   -1.948</td> <td> 0.052</td> <td>   -6.074</td> <td>    0.021</td>
 </tr>
 <tr>
-  <th>no_of_songs</th>          <td>   -0.0016</td> <td>    0.000</td> <td>   -5.497</td> <td> 0.000</td> <td>   -0.002</td> <td>   -0.001</td>
+  <th>loudness_avg</th>          <td>    0.0140</td> <td>    0.043</td> <td>    0.329</td> <td> 0.742</td> <td>   -0.069</td> <td>    0.098</td>
 </tr>
 <tr>
-  <th>num_of_artists</th>       <td>    0.0126</td> <td>    0.002</td> <td>    6.208</td> <td> 0.000</td> <td>    0.009</td> <td>    0.017</td>
+  <th>loudness_std</th>          <td>    0.1495</td> <td>    0.089</td> <td>    1.672</td> <td> 0.095</td> <td>   -0.026</td> <td>    0.325</td>
 </tr>
 <tr>
-  <th>num_of_markets_avg</th>   <td>   -0.0174</td> <td>    0.005</td> <td>   -3.301</td> <td> 0.001</td> <td>   -0.028</td> <td>   -0.007</td>
+  <th>mode_avg</th>              <td>    1.5777</td> <td>    0.691</td> <td>    2.282</td> <td> 0.023</td> <td>    0.222</td> <td>    2.934</td>
 </tr>
 <tr>
-  <th>song_duration_avg</th>    <td>-6.489e-05</td> <td>    0.000</td> <td>   -0.449</td> <td> 0.654</td> <td>   -0.000</td> <td>    0.000</td>
+  <th>mode_std</th>              <td>    2.3314</td> <td>    1.259</td> <td>    1.852</td> <td> 0.064</td> <td>   -0.138</td> <td>    4.800</td>
 </tr>
 <tr>
-  <th>song_duration_std</th>    <td> 3.722e-07</td> <td> 7.89e-05</td> <td>    0.005</td> <td> 0.996</td> <td>   -0.000</td> <td>    0.000</td>
+  <th>num_of_artists</th>        <td>    0.0082</td> <td>    0.002</td> <td>    3.830</td> <td> 0.000</td> <td>    0.004</td> <td>    0.012</td>
 </tr>
 <tr>
-  <th>song_popularity_avg</th>  <td>    0.0546</td> <td>    0.006</td> <td>    9.415</td> <td> 0.000</td> <td>    0.043</td> <td>    0.066</td>
+  <th>num_of_markets_avg</th>    <td>   -0.0193</td> <td>    0.005</td> <td>   -3.551</td> <td> 0.000</td> <td>   -0.030</td> <td>   -0.009</td>
 </tr>
 <tr>
-  <th>song_popularity_std</th>  <td>   -0.0695</td> <td>    0.015</td> <td>   -4.589</td> <td> 0.000</td> <td>   -0.099</td> <td>   -0.040</td>
+  <th>num_of_songs</th>          <td>    0.0049</td> <td>    0.001</td> <td>    5.312</td> <td> 0.000</td> <td>    0.003</td> <td>    0.007</td>
 </tr>
 <tr>
-  <th>speechiness_avg</th>      <td>    2.1056</td> <td>    1.575</td> <td>    1.337</td> <td> 0.181</td> <td>   -0.983</td> <td>    5.194</td>
+  <th>playlist_name_length</th>  <td>   -0.0093</td> <td>    0.008</td> <td>   -1.180</td> <td> 0.238</td> <td>   -0.025</td> <td>    0.006</td>
 </tr>
 <tr>
-  <th>speechiness_std</th>      <td>   -8.3858</td> <td>    2.700</td> <td>   -3.106</td> <td> 0.002</td> <td>  -13.680</td> <td>   -3.092</td>
+  <th>song_duration_avg</th>     <td>  1.88e-05</td> <td> 9.47e-06</td> <td>    1.985</td> <td> 0.047</td> <td> 2.24e-07</td> <td> 3.74e-05</td>
 </tr>
 <tr>
-  <th>tempo_avg</th>            <td>    0.0076</td> <td>    0.010</td> <td>    0.792</td> <td> 0.428</td> <td>   -0.011</td> <td>    0.026</td>
+  <th>song_duration_std</th>     <td>-7.191e-06</td> <td>  3.2e-06</td> <td>   -2.244</td> <td> 0.025</td> <td>-1.35e-05</td> <td>-9.06e-07</td>
 </tr>
 <tr>
-  <th>tempo_std</th>            <td>    0.0050</td> <td>    0.013</td> <td>    0.381</td> <td> 0.703</td> <td>   -0.021</td> <td>    0.031</td>
+  <th>song_popularity_avg</th>   <td>    0.0550</td> <td>    0.007</td> <td>    7.694</td> <td> 0.000</td> <td>    0.041</td> <td>    0.069</td>
 </tr>
 <tr>
-  <th>time_signature_avg</th>   <td>    2.7035</td> <td>    0.894</td> <td>    3.025</td> <td> 0.003</td> <td>    0.951</td> <td>    4.456</td>
+  <th>song_popularity_std</th>   <td>   -0.0676</td> <td>    0.014</td> <td>   -4.736</td> <td> 0.000</td> <td>   -0.096</td> <td>   -0.040</td>
 </tr>
 <tr>
-  <th>time_signature_std</th>   <td>    1.7066</td> <td>    0.544</td> <td>    3.136</td> <td> 0.002</td> <td>    0.639</td> <td>    2.774</td>
+  <th>speechiness_avg</th>       <td>    2.7265</td> <td>    0.834</td> <td>    3.271</td> <td> 0.001</td> <td>    1.091</td> <td>    4.362</td>
 </tr>
 <tr>
-  <th>valence_avg</th>          <td>   -2.7682</td> <td>    0.867</td> <td>   -3.193</td> <td> 0.001</td> <td>   -4.469</td> <td>   -1.068</td>
+  <th>speechiness_std</th>       <td>   -0.8743</td> <td>    1.300</td> <td>   -0.673</td> <td> 0.501</td> <td>   -3.424</td> <td>    1.675</td>
 </tr>
 <tr>
-  <th>valence_std</th>          <td>   -3.2637</td> <td>    2.125</td> <td>   -1.536</td> <td> 0.125</td> <td>   -7.431</td> <td>    0.903</td>
+  <th>tempo_avg</th>             <td>    0.0055</td> <td>    0.008</td> <td>    0.678</td> <td> 0.498</td> <td>   -0.010</td> <td>    0.021</td>
+</tr>
+<tr>
+  <th>tempo_std</th>             <td>    0.0002</td> <td>    0.011</td> <td>    0.023</td> <td> 0.982</td> <td>   -0.021</td> <td>    0.022</td>
+</tr>
+<tr>
+  <th>time_signature_avg</th>    <td>    0.3896</td> <td>    0.448</td> <td>    0.870</td> <td> 0.384</td> <td>   -0.489</td> <td>    1.268</td>
+</tr>
+<tr>
+  <th>time_signature_std</th>    <td>    0.1219</td> <td>    0.348</td> <td>    0.350</td> <td> 0.726</td> <td>   -0.560</td> <td>    0.804</td>
+</tr>
+<tr>
+  <th>valence_avg</th>           <td>    1.5720</td> <td>    0.670</td> <td>    2.346</td> <td> 0.019</td> <td>    0.258</td> <td>    2.886</td>
+</tr>
+<tr>
+  <th>valence_std</th>           <td>   -1.6397</td> <td>    1.693</td> <td>   -0.968</td> <td> 0.333</td> <td>   -4.961</td> <td>    1.682</td>
 </tr>
 </table>
 <table class="simpletable">
 <tr>
-  <th>Omnibus:</th>       <td>10.725</td> <th>  Durbin-Watson:     </th> <td>   1.799</td>
+  <th>Omnibus:</th>       <td>525.043</td> <th>  Durbin-Watson:     </th> <td>   1.450</td>
 </tr>
 <tr>
-  <th>Prob(Omnibus):</th> <td> 0.005</td> <th>  Jarque-Bera (JB):  </th> <td>   9.060</td>
+  <th>Prob(Omnibus):</th> <td> 0.000</td>  <th>  Jarque-Bera (JB):  </th> <td>2564.617</td>
 </tr>
 <tr>
-  <th>Skew:</th>          <td>-0.094</td> <th>  Prob(JB):          </th> <td>  0.0108</td>
+  <th>Skew:</th>          <td>-1.406</td>  <th>  Prob(JB):          </th> <td>    0.00</td>
 </tr>
 <tr>
-  <th>Kurtosis:</th>      <td> 2.734</td> <th>  Cond. No.          </th> <td>2.55e+07</td>
+  <th>Kurtosis:</th>      <td> 8.383</td>  <th>  Cond. No.          </th> <td>1.37e+11</td>
 </tr>
 </table>
 
@@ -1011,20 +1053,15 @@ relevant
 
 
 
-    acousticness_avg       3.160187e-03
-    acousticness_std       1.758250e-03
-    energy_avg             2.313350e-07
-    is_public              2.403950e-35
-    liveness_avg           8.460709e-04
-    no_of_songs            4.366463e-08
-    num_of_artists         6.518359e-10
-    num_of_markets_avg     9.815253e-04
-    song_popularity_avg    1.244719e-20
-    song_popularity_std    4.731874e-06
-    speechiness_std        1.920530e-03
-    time_signature_avg     2.517768e-03
-    time_signature_std     1.737323e-03
-    valence_avg            1.431939e-03
+    const                    1.979354e-49
+    artist_popularity_std    3.307456e-04
+    last_update              1.356523e-32
+    num_of_artists           1.329988e-04
+    num_of_markets_avg       3.950970e-04
+    num_of_songs             1.232451e-07
+    song_popularity_avg      2.448120e-14
+    song_popularity_std      2.369755e-06
+    speechiness_avg          1.095569e-03
     dtype: float64
 
 
@@ -1039,7 +1076,7 @@ len(relevant)
 
 
 
-    14
+    9
 
 
 
@@ -1052,13 +1089,14 @@ plt.figure(figsize=(20,20))
 
 i=1
 
-for r in relevant.index:
+for r in relevant.index[1:]:
     
     plt.subplot(5,3,i)
     plt.scatter(data1[r], data1['followers'])
     plt.yscale('log')
     plt.xlabel(r)
     plt.ylabel('Number of Followers')
+    plt.ylim(ymin=1)
         
     i += 1
     
@@ -1069,7 +1107,7 @@ for r in relevant.index:
 
 
 
-![png](EDA_files/EDA_24_0.png)
+![png](EDA_files/EDA_23_0.png)
 
 
 
