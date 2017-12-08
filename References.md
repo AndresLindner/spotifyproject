@@ -1,6 +1,6 @@
 ---
 title: References
-nav_include: 6
+nav_include: 7
 ---
 
 - Reference 1: Berenzweig, Adam, Beth Logan, Daniel P.W. Ellis and Brian Whitman. A Large-Scale Evaluation
