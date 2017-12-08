@@ -1,7 +1,7 @@
 ---
 title: Generation Algorithm
 notebook: PlaylistGeneration.ipynb
-nav_include: 4
+nav_include: 5
 ---
 
 ## Contents
