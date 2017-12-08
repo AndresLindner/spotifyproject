@@ -1,11 +1,10 @@
 
 ---
-title: EDA
-
-notebook: EDA.ipynb
-
-nav_include: 1
+title:  EDA
+notebook:   EDA.ipynb
+nav_include:    1
 ---
+
 
 ## Contents
 {:.no_toc}
@@ -13,8 +12,6 @@ nav_include: 1
 {: toc}
 
 
-
-# EDA
 
 
 
