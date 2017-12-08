@@ -2,9 +2,8 @@
 ---
 title: EDA
 notebook: EDA.ipynb
-nav_include: 2
+nav_include: 1
 ---
-
 
 ## Contents
 {:.no_toc}
