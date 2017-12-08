@@ -1,9 +1,9 @@
 ---
-title: Summary and Conclusion
+title: Project Trajectory and Summary
 nav_include: 6
 ---
 
-### Summary
+### Approach and Project Trajectory
 
 1.
 Then we built more complex models using random forest regression and gradient boosted regression trees and were
@@ -21,7 +21,7 @@ appearance the playlist name.
 6. Based on the above engineered features we were able to improve the test R-Squared value to about 75%
 
 
-### Conclusion
+### Summary
 We can predict the success of a playlist based on the followeing features a)How recently is the playlist updated b)How long has the playlist been active 
 c) Popularity of the song d)Popularity of the artists d) Number of songs in the playlist 
 
