@@ -8,17 +8,21 @@ nav_include: 6
 1.
 Then we built more complex models using random forest regression and gradient boosted regression trees and were
 able to improve the test R-squared to about 63%
+
 2.
 Next we added features from the million song database to provide more data on the artists and the decade to which
 the song belongs. These additional features did not help improve the model
+
 3.
 We then added features related to the artist genres - which is a statistic about the number of genres represented.
 We got the genre info from a website called 'everyNoise'.
+
 4.
 We engineered a playlist parameter based on the frequency of the words associated with the playlists and its
 appearance the playlist name.
-5.
-6. Based on the above engineered features we were able to improve the test R-Squared value to about 75%
+
+
+5. Based on the above engineered features we were able to improve the test R-Squared value to about 75%
 
 
 ### Summary
