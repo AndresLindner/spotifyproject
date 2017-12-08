@@ -1,3 +1,8 @@
+---
+title: Playlist Mining
+nav_include: 1
+---
+
 Playlist Mining
 
 For this project we centered our data on existing playlists from spotify. We decided to get these playlists from two different curators. Spotify’s public playlists which are a combination of machine learning generated playlists and professional music curators  and the EveryNoise.com playlist set which is a compilation of playlists for around 1500 genres. EveryNoise.com uses acoustic similarity to generate these playlists. We found that some of these playlists were actually very good when looking at the playlist generated for our favorites musical genres. We decided that we could leverage on some of the already generated playlists to train from them using different features.
