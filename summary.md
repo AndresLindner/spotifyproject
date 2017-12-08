@@ -21,8 +21,8 @@ We got the genre info from a website called 'everyNoise'.
 We engineered a playlist parameter based on the frequency of the words associated with the playlists and its
 appearance the playlist name.
 
-
-5. Based on the above engineered features we were able to improve the test R-Squared value to about 75%
+5. 
+Based on the above engineered features we were able to improve the test R-Squared value to about 75%
 
 
 ### Summary
